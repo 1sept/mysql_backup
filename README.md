@@ -1,13 +1,32 @@
-# mysql_backup
+# MySQL backup shell script
 
 MySQL backup shell script
 Feature rich MySQL / MariaDB backup script.
 
-# Setup password
+## Usage
+
+**Usage:** `mysql_backup.sh -d /var/backup -n daily [-c 10 -s -a -e test@domain.org]`
+
+- **-d , --dir  **
+backup directory
+- **-n, --name**
+backup name
+- **-c, --copies**
+number of copies to store (default 10)
+- **-e, --email**
+notification email
+- **-l, --lock-all-tables**
+- **-s, --single-transaction**
+- **-z, --compress**
+compress dump by gzip
+- **-q, --quiet**
+- **-h, --help**
+
+## Setup database password
 
 Set mysql `user` and `password` to user that execute script using `.my.cnf` in user homedir.
 
-# .my.cnf example
+## .my.cnf example
 
 ```
     [client]

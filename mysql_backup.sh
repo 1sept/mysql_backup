@@ -1,12 +1,4 @@
 #!/bin/sh
-# set mysql user and password to user who dump mysql by .my.cnf in user homedir
-#
-# nano /home/mysqldump/.my.cnf
-# [client]
-# user = mysqldump
-# password = secret_passwd_here_HMnab4sBMmMwtDgvF=qZuuU#gsED9u6J
-# host = localhost
-#
 
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin" ;
 
@@ -16,16 +8,16 @@ mypidfile="/var/run/`basename ${0}`.pid" ;
 usage()
 {
         echo "Usage: mysql_backup.sh -d /var/backup -n daily [-c 10 -s -a -e test@domain.org]"
-	echo
+	    echo
        	echo "-d | --dir :: backup directory"
-	echo "-n | --name :: backup name"
-	echo "-c | --copies :: number of copies to store (default 10)"
-	echo "-e | --email :: notification email"
+	    echo "-n | --name :: backup name"
+        echo "-c | --copies :: number of copies to store (default 10)"
+        echo "-e | --email :: notification email"
        	echo "-l | --lock-all-tables"
        	echo "-s | --single-transaction"
-	echo "-a | --archive :: gzip dump"
-	echo "-q | --quiet"
-       	echo "-h help"
+        echo "-z | --compress :: gzip dump"
+        echo "-q | --quiet"
+        echo "-h help"
 }
 
 error()
@@ -42,23 +34,25 @@ while [ "$1" != "" ]; do
         -d | --dir )            shift
                                 dir=$1
                                 ;;
-	-n | --name )		shift
+	    -n | --name )		    shift
                                	name=$1
                                	;;
        	-c | --copies )         shift
                                 copies=$1
                                 ;;
-	-e | --email )          shift
+	    -e | --email )          shift
                                 email=$1
                                 ;;
-        -l | --lock-all-tables ) lock=1
+        -l | --lock-all-tables ) 
+                                lock=1
                                 ;;
-	-s | --single-transaction ) singletrans=1
+	    -s | --single-transaction ) 
+                                singletrans=1
                                 ;;
-	-a | --archive )        archive=1
+	    -z | --compress )       archive=1
                                 ;;
-	-q | --quiet )		quiet=1
-				;;
+	    -q | --quiet )		    quiet=1
+				                ;;
         -h | --help )           usage
                                 exit
                                 ;;
@@ -77,9 +71,9 @@ fi
 
 if [ "${name}" = "" ] ;
 then
-    	usage ;
-        error  "Name of backup is not set!"
-        exit 1 ;
+    usage ;
+    error  "Name of backup is not set!"
+    exit 1 ;
 fi
 
 if [ "${copies}" = "" ] || [ ! -n "${copies}" ] || [ "${copies}" -le "0" ] ;
@@ -95,7 +89,8 @@ if ! [ -d ${dir} ] ; then
 fi
 
 if [ -s ${mypidfile} ] ; then
-       	error "ERROR: `hostname` script ${script} already running!" ;
+    
+    error "ERROR: `hostname` script ${script} already running!" ;
 	exit 1 ;
 fi
 
@@ -108,8 +103,8 @@ mysqlparams="   --all-databases \
                 --add-drop-table \
                 --add-drop-trigger \
                 --add-locks \
-		--compact \
-		--disable-keys \
+		        --compact \
+		        --disable-keys \
                 --apply-slave-statements \
                 --allow-keywords \
                 --complete-insert \
@@ -127,15 +122,15 @@ mysqlparams="   --all-databases \
                 --routines \
                 --triggers \
                 --force \
-		--max-allowed-packet=512M
+		        --max-allowed-packet=512M \
                 --log-error=/var/log/mysqldump.log" ;
 
 if [ "${singletrans}" ] ; then
-        mysqlparams="${mysqlparams} --single-transaction" ;
+    mysqlparams="${mysqlparams} --single-transaction" ;
 fi
 
 if [ "${lock}" ] ; then
-        mysqlparams="${mysqlparams} --lock-all-tables" ;
+    mysqlparams="${mysqlparams} --lock-all-tables" ;
 fi
 
 if [ `ls ${dir} | grep mysqldump.daily | wc -l` -ge "${copies}" ] ; then
@@ -161,7 +156,7 @@ mysqldump ${mysqlparams} > ${dump_file_name} ;
 if [ "${archive}" ] ; then
 
 	if [ ! "${quiet}" ] ; then
-        	echo "Archiving dump (`date +\"%Y-%m-%d %H:%M:%S\"`)..." ;
+        echo "Archiving dump (`date +\"%Y-%m-%d %H:%M:%S\"`)..." ;
 	fi
 
 	gzip ${dump_file_name} ;
