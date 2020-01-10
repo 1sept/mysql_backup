@@ -134,7 +134,7 @@ fi
 
 if [ `ls ${dir} | grep mysqldump.daily | wc -l` -ge "${copies}" ] ; then
 	i=1;
-	for filename in `ls ${dir} | grep mysqldump.daily. | sort -r` ; do
+	for filename in `ls ${dir} | grep mysqldump.`hostname -s`.daily. | sort -r` ; do
 		if [ "${i}" -ge "${copies}" ] ; then
 			rm "${dir}/${filename}" ;
 		fi
@@ -147,6 +147,8 @@ if [ ! "${quiet}" ] ; then
 fi
 
 date=`date +"%y%m%d.%H%M%S"` ;
+
+
 
 dump_file_name="${dir}/mysqldump.`hostname -s`.${name}.${date}.sql" ;
 
