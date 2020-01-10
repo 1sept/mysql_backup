@@ -27,6 +27,10 @@ compress dump by gzip
 - **-q, --quiet**
 - **-h, --help**
 
+## setup script in crontab
+
+`20      01      *       *     *    root    /bin/sh /path/to/mysql_backup.sh -d /backup/dir/ -n daily -c 10 -e admin@email.com -a`
+
 ## .my.cnf example
 
 ```
