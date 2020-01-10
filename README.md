@@ -24,7 +24,7 @@ compress dump by gzip
 
 ## Setup database password
 
-Set mysql `user` and `password` to user that execute script using `.my.cnf` in user homedir.
+Set database `user` and `password` to user that execute script using `.my.cnf` in user homedir.
 
 ## .my.cnf example
 
