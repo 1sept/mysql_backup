@@ -7,17 +7,17 @@ Feature rich MySQL / MariaDB backup script.
 
 **Usage:** `mysql_backup.sh -d /var/backup -n daily [-c 10 -s -a -e test@domain.org]`
 
-- **-d , --dir**
+- **-d , --dir**  
 backup directory
-- **-n, --name**
+- **-n, --name**  
 backup name
-- **-c, --copies**
+- **-c, --copies**  
 number of copies to store (default 10)
-- **-e, --email**
+- **-e, --email**  
 notification email
 - **-l, --lock-all-tables**
 - **-s, --single-transaction**
-- **-z, --compress**
+- **-z, --compress**  
 compress dump by gzip
 - **-q, --quiet**
 - **-h, --help**
