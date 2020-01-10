@@ -7,7 +7,7 @@ Feature rich MySQL / MariaDB backup script.
 
 **Usage:** `mysql_backup.sh -d /var/backup -n daily [-c 10 -s -a -e test@domain.org]`
 
-- **-d , --dir  **
+- **-d , --dir**
 backup directory
 - **-n, --name**
 backup name
