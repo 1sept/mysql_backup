@@ -25,7 +25,7 @@ notification email
 - **-l, --lock-all-tables**
 - **-s, --single-transaction**
 - **-z, --compress**  
-compress dump by gzip
+compress dump using gzip
 - **-q, --quiet**
 - **-h, --help**
 

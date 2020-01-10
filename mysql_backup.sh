@@ -116,7 +116,6 @@ mysqlparams="   --all-databases \
                 --flush-privileges \
                 --master-data \
                 --include-master-host-port \
-                --order-by-primary \
                 --quick \
                 --quote-names \
                 --routines \
