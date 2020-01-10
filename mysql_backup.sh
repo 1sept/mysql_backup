@@ -132,9 +132,11 @@ if [ "${lock}" ] ; then
     mysqlparams="${mysqlparams} --lock-all-tables" ;
 fi
 
+prefix="mysqldump.`hostname -s`.${name}" ;
+
 if [ `ls ${dir} | grep mysqldump.daily | wc -l` -ge "${copies}" ] ; then
 	i=1;
-	for filename in `ls ${dir} | grep mysqldump.`hostname -s`.daily. | sort -r` ; do
+	for filename in `ls ${dir} | grep "${prefix}." | sort -r` ; do
 		if [ "${i}" -ge "${copies}" ] ; then
 			rm "${dir}/${filename}" ;
 		fi
@@ -149,10 +151,7 @@ fi
 date=`date +"%y%m%d.%H%M%S"` ;
 
 
-
-dump_file_name="${dir}/mysqldump.`hostname -s`.${name}.${date}.sql" ;
-
-echo $dump_file_name
+dump_file_name="${dir}/${prefix}.${date}.sql" ;
 
 mysqldump ${mysqlparams} > ${dump_file_name} ;
 
