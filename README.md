@@ -9,7 +9,7 @@ Feature rich MySQL / MariaDB backup script.
 
 ## Example
 
-**Usage:** `mysql_backup.sh -d /backup/dir/ -n daily [-c 10 -s -a -e test@domain.org]`
+**Usage:** `mysql_backup.sh -d /backup/dir/ -n daily [-c 10 -s -z -e test@domain.org]`
 
 ## Options
 
@@ -30,7 +30,7 @@ compress dump using gzip
 
 ## Setup script in crontab
 
-`20      01      *       *     *    root    /bin/sh /path/to/mysql_backup.sh -d /backup/dir/ -n daily -c 10 -e admin@email.com -a`
+`20      01      *       *     *    root    /bin/sh /path/to/mysql_backup.sh -d /backup/dir/ -n daily -c 10 -e admin@email.com -z`
 
 ## .my.cnf example
 

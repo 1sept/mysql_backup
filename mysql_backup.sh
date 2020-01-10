@@ -49,7 +49,7 @@ while [ "$1" != "" ]; do
 	    -s | --single-transaction ) 
                                 singletrans=1
                                 ;;
-	    -z | --compress )       archive=1
+	    -z | --compress )       compress=1
                                 ;;
 	    -q | --quiet )		    quiet=1
 				                ;;
@@ -152,10 +152,10 @@ dump_file_name="${dir}/mysqldump.${name}.${date}.sql" ;
 
 mysqldump ${mysqlparams} > ${dump_file_name} ;
 
-if [ "${archive}" ] ; then
+if [ "${compress}" ] ; then
 
 	if [ ! "${quiet}" ] ; then
-        echo "Archiving dump (`date +\"%Y-%m-%d %H:%M:%S\"`)..." ;
+        echo "Compressing dump (`date +\"%Y-%m-%d %H:%M:%S\"`)..." ;
 	fi
 
 	gzip ${dump_file_name} ;
