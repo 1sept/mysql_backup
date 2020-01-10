@@ -29,19 +29,19 @@ error()
     fi
 }
 
-while [ "$1" != "" ]; do
-    case $1 in
+while [ "${1}" != "" ]; do
+    case ${1} in
         -d | --dir )            shift
-                                dir=$1
+                                dir=${1}
                                 ;;
 	    -n | --name )		    shift
-                               	name=$1
+                               	name=${1}
                                	;;
        	-c | --copies )         shift
-                                copies=$1
+                                copies=${1}
                                 ;;
 	    -e | --email )          shift
-                                email=$1
+                                email=${1}
                                 ;;
         -l | --lock-all-tables ) 
                                 lock=1
@@ -61,20 +61,6 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
-
-if [ "${dir}" = "" ] ;
-then
-	usage ;
-	error  "Backup dir is not set!"
-	exit 1 ;
-fi
-
-if [ "${name}" = "" ] ;
-then
-    usage ;
-    error  "Name of backup is not set!"
-    exit 1 ;
-fi
 
 if [ "${copies}" = "" ] || [ ! -n "${copies}" ] || [ "${copies}" -le "0" ] ;
 then
