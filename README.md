@@ -14,19 +14,19 @@ Feature rich MySQL / MariaDB backup script.
 ## Options
 
 **-d , --dir**  
-backup directory
+backup directory  
 **-n, --name**  
-backup name
+backup name  
 **-c, --copies**  
-number of copies to store (default 10)
+number of copies to store (default 10)  
 **-e, --email**  
-notification email
-**-l, --lock-all-tables**
-**-s, --single-transaction**
+notification email  
+**-l, --lock-all-tables**  
+**-s, --single-transaction**  
 **-z, --compress**  
-compress dump using gzip
-**-q, --quiet**
-**-h, --help**
+compress dump using gzip  
+**-q, --quiet**  
+**-h, --help**  
 
 ## Setup script in crontab
 
