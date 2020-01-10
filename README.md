@@ -1,4 +1,4 @@
-# MySQL backup shell script
+# MySQL backup script
 
 Feature rich MySQL / MariaDB shell backup script.
 
