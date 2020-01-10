@@ -1,6 +1,6 @@
 # MySQL backup script
 
-Feature rich MySQL / MariaDB shell backup script.
+Feature rich MySQL / MariaDB backup script.
 
 ## Installation
 
