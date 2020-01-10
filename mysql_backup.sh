@@ -148,7 +148,9 @@ fi
 
 date=`date +"%y%m%d.%H%M%S"` ;
 
-dump_file_name="${dir}/mysqldump.${name}.${date}.sql" ;
+dump_file_name="${dir}/mysqldump.`hostname -s`.${name}.${date}.sql" ;
+
+echo $dump_file_name
 
 mysqldump ${mysqlparams} > ${dump_file_name} ;
 
