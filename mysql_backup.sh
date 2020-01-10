@@ -16,8 +16,8 @@ usage()
        	echo "-l | --lock-all-tables"
        	echo "-s | --single-transaction"
         echo "-z | --compress :: gzip dump"
-        echo "-q | --quiet"
-        echo "-h | --help"
+        echo "-q | --quiet :: silent mode"
+        echo "-h | --help :: display this help"
 }
 
 error()
