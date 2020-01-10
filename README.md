@@ -3,6 +3,11 @@
 MySQL backup shell script
 Feature rich MySQL / MariaDB backup script.
 
+## Installation
+
+- `git clone https://github.com/1sept/mysql_backup.git`
+- set database `user` and `password` in `.my.cnf` located in user homedir.
+
 ## Usage
 
 **Usage:** `mysql_backup.sh -d /var/backup -n daily [-c 10 -s -a -e test@domain.org]`
@@ -21,10 +26,6 @@ notification email
 compress dump by gzip
 - **-q, --quiet**
 - **-h, --help**
-
-## Setup database password
-
-Set database `user` and `password` to user that execute script using `.my.cnf` in user homedir.
 
 ## .my.cnf example
 
