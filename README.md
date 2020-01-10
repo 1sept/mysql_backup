@@ -10,7 +10,7 @@ Feature rich MySQL / MariaDB backup script.
 
 ## Example
 
-**Usage:** `mysql_backup.sh -d /var/backup -n daily [-c 10 -s -a -e test@domain.org]`
+**Usage:** `mysql_backup.sh -d /backup/dir/ -n daily [-c 10 -s -a -e test@domain.org]`
 
 ## Options
 
