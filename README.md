@@ -37,8 +37,9 @@ compress dump using gzip
 ## .my.cnf example
 
 ```
-    [client]
+    [mysqldump]
     user = mysqldump
     password = secret_passwd_here_HMnab4sBMmMwtDgvF=qZuuU#gsED9u6J
     host = localhost
+    max-allowed-packet=512M
 ```

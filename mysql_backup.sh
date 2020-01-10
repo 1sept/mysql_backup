@@ -121,7 +121,7 @@ mysqlparams="   --all-databases \
                 --routines \
                 --triggers \
                 --force \
-		        --max-allowed-packet=512M \
+		        --max-allowed-packet=128M \
                 --log-error=/var/log/mysqldump.log" ;
 
 if [ "${singletrans}" ] ; then
