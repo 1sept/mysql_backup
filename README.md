@@ -39,7 +39,7 @@ compress dump using gzip
 ```
     [mysqldump]
     user = mysqldump
-    password = secret_passwd_here_HMnab4sBMmMwtDgvF=qZuuU#gsED9u6J
+    password = secret_passwd_here
     host = localhost
     max-allowed-packet=512M
 ```
