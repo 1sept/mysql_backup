@@ -20,7 +20,7 @@ backup name
 **-c, --copies**  
 number of copies to store (default 10)  
 **-e, --email**  
-notification email  
+email to send notifications  
 **-l, --lock-all-tables**  
 lock all tables across all databases. This is achieved by acquiring a global read lock for the duration of the whole dump. This option automatically turns off `--single-transaction` and `--lock-tables`.  
 **-s, --single-transaction**  
