@@ -17,7 +17,7 @@ usage()
        	echo "-s | --single-transaction"
         echo "-z | --compress :: gzip dump"
         echo "-q | --quiet"
-        echo "-h help"
+        echo "-h | --help"
 }
 
 error()
