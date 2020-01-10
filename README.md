@@ -22,7 +22,8 @@ number of copies to store (default 10)
 **-e, --email**  
 email to send notifications  
 **-l, --lock-all-tables**  
-lock all tables across all databases. This is achieved by acquiring a global read lock for the duration of the whole dump. This option automatically turns off `--single-transaction` and `--lock-tables`.  
+lock all tables across all databases. This is achieved by acquiring a global read lock for the duration of the whole dump. This option automatically turns off `--single-transaction` and `--lock-tables`. 
+WARNING!!! This will block all applications.
 **-s, --single-transaction**  
 this option sets the transaction isolation mode to REPEATABLE READ and sends a START TRANSACTION SQL statement to the server before dumping data. It is useful only with transactional tables such as InnoDB, because then it dumps the consistent state of the database at the time when START TRANSACTION was issued without blocking any applications.  
 **-z, --compress**  
