@@ -134,9 +134,9 @@ fi
 
 prefix="mysqldump.`hostname -s`.${name}" ;
 
-if [ `ls ${dir} | grep mysqldump.daily | wc -l` -ge "${copies}" ] ; then
+if [ `ls ${dir} | grep ${prefix} | wc -l` -ge "${copies}" ] ; then
 	i=1;
-	for filename in `ls ${dir} | grep "${prefix}." | sort -r` ; do
+	for filename in `ls ${dir} | grep ${prefix} | sort -r` ; do
 		if [ "${i}" -ge "${copies}" ] ; then
 			rm "${dir}/${filename}" ;
 		fi
