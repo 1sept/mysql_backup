@@ -131,7 +131,7 @@ if [ `ls ${dir} | grep ${prefix} | wc -l` -ge "${copies}" ] ; then
 fi
 
 if [ ! "${quiet}" ] ; then
-	echo "Starting database dump (`date +\"%Y-%m-%d %H:%M:%S\"`)" ;
+	echo "Starting database dump (`date +\"%H:%M:%S\"`)" ;
 fi
 
 date=`date +"%y%m%d.%H%M%S"` ;
@@ -144,10 +144,14 @@ mysqldump ${mysqlparams} > ${dump_file_name} ;
 if [ "${compress}" ] ; then
 
 	if [ ! "${quiet}" ] ; then
-        echo "Compressing dump (`date +\"%Y-%m-%d %H:%M:%S\"`)..." ;
+        echo "Compressing dump (`date +\"%H:%M:%S\"`)..." ;
 	fi
 
 	gzip ${dump_file_name} ;
+fi
+
+if [ ! "${quiet}" ] ; then
+    echo "atabase dump completed (`date +\"%H:%M:%S\"`)..." ;
 fi
 
 rm -f ${mypidfile} ;
