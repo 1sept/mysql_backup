@@ -35,7 +35,7 @@ set master data in dump
 
 ## Setup script in crontab
 
-`20      01      *       *     *    root    /bin/sh /path/to/mysql_backup.sh -d /backup/dir/ -n daily -c 10 -e admin@email.com -z -q`
+`20      01      *       *     *    root    /bin/sh /path/to/mysql_backup.sh -d /backup/dir/ -n daily -c 10 -e admin@email.com -z -q -m`
 
 ## .my.cnf example
 
