@@ -91,9 +91,7 @@ mysqlparams="   --all-databases \
                 --add-drop-table \
                 --add-drop-trigger \
                 --add-locks \
-		        --compact \
 		        --disable-keys \
-                --apply-slave-statements \
                 --allow-keywords \
                 --complete-insert \
                 --create-options \
@@ -105,8 +103,10 @@ mysqlparams="   --all-databases \
                 --quick \
                 --quote-names \
                 --routines \
+                --set-charset \
                 --triggers \
                 --force \
+                --comments \
 		        --max-allowed-packet=128M \
                 --log-error=/var/log/mysqldump.log" ;
 
@@ -119,7 +119,7 @@ if [ "${lock}" ] ; then
 fi
 
 if [ "${master}" ] ; then
-    mysqlparams="${mysqlparams} --master-data --include-master-host-port" ;
+    mysqlparams="${mysqlparams} --master-data --include-master-host-port  --apply-slave-statements" ;
 fi
 
 prefix="mysqldump.`hostname -s`.${name}" ;
