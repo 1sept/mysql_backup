@@ -119,7 +119,7 @@ if [ "${lock}" ] ; then
 fi
 
 if [ "${master}" ] ; then
-    mysqlparams="${mysqlparams} --master-data --include-master-host-port  --apply-slave-statements" ;
+    mysqlparams="${mysqlparams} --master-data --include-master-host-port --apply-slave-statements" ;
 fi
 
 prefix="mysqldump.`hostname -s`.${name}" ;
