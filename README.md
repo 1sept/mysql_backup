@@ -28,6 +28,8 @@ WARNING!!! This will block all applications.
 this option sets the transaction isolation mode to REPEATABLE READ and sends a START TRANSACTION SQL statement to the server before dumping data. It is useful only with transactional tables such as InnoDB, because then it dumps the consistent state of the database at the time when START TRANSACTION was issued without blocking any applications.  
 **-z, --compress**  
 compress dump using gzip  
+**-m, --master**  
+set master data in dump  
 **-q, --quiet**  
 **-h, --help**  
 

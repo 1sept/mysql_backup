@@ -16,6 +16,7 @@ usage()
        	echo "-l | --lock-all-tables"
        	echo "-s | --single-transaction"
         echo "-z | --compress :: gzip dump"
+        echo "-m | --master :: set master data"
         echo "-q | --quiet :: silent mode"
         echo "-h | --help :: display this help"
 }
@@ -51,6 +52,7 @@ while [ "${1}" != "" ]; do
                                 ;;
 	    -z | --compress )       compress=1
                                 ;;
+        -m | --master )         master=1
 	    -q | --quiet )		    quiet=1
 				                ;;
         -h | --help )           usage
@@ -100,8 +102,6 @@ mysqlparams="   --all-databases \
                 --events \
                 --extended-insert \
                 --flush-privileges \
-                --master-data \
-                --include-master-host-port \
                 --quick \
                 --quote-names \
                 --routines \
@@ -116,6 +116,10 @@ fi
 
 if [ "${lock}" ] ; then
     mysqlparams="${mysqlparams} --lock-all-tables" ;
+fi
+
+if [ "${master}" ] ; then
+    mysqlparams="${mysqlparams} --master-data --include-master-host-port" ;
 fi
 
 prefix="mysqldump.`hostname -s`.${name}" ;
