@@ -45,7 +45,7 @@ while [ "${1}" != "" ]; do
         	rm ${filename} ;
 	else
 		echo "Compressing dump"
-		xz ${filename} ;
+		xz -T2 ${filename} ;
         	echo "Database ${1} dump successful completed. ('${filename}.xz')" ;
 	fi
 
