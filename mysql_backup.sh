@@ -84,7 +84,7 @@ fi
 
 if [ -s ${pidfile} ] ; then
     
-    error "ERROR: `hostname` script ${script} already running!" ;
+    error "ERROR: `hostname` script ${script} already running! Pid file '${pidfile}' exists!" ;
 	exit 1 ;
 fi
 
