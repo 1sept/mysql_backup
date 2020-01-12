@@ -72,8 +72,7 @@ then
 	copies=10
 fi
 
-
-if ! [ -d ${dir} ] ; then
+if [ "${dir}" = "" ] || [ ! -d ${dir} ] ; then
 
 	error "Directory '${dir}' does not exists!" ;
 	exit 1 ;

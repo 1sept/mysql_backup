@@ -1,6 +1,9 @@
 # MySQL backup script
 
 Feature rich MySQL / MariaDB backup script.
+Scripts
+- mysql_backup.sh :: backuping mysql databases in single dump. 
+- mysql_db_dump.sh :: dumping single database
 
 ## Installation
 
@@ -11,7 +14,7 @@ Feature rich MySQL / MariaDB backup script.
 
 **Usage:** `mysql_backup.sh -d /backup/dir/ -n daily [-c 10 -s -z -e test@domain.org]`
 
-## Options
+## mysql_bakcup Options
 
 **-d , --dir**  
 backup directory  
