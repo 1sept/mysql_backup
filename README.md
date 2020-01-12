@@ -37,6 +37,8 @@ compress dump using xz
 **-m, --master**  
 set master data in dump  
 **-q, --quiet**  
+**--pid-file**  
+set pid-file (default: /var/run/mysql_backup.sh.pid)
 **-h, --help**  
 
 ## Setup script in crontab

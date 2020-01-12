@@ -3,7 +3,7 @@
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin" ;
 
 script="$(basename "$(test -L "${0}" && readlink "${0}" || echo "${0}")")" ;
-mypidfile="/var/run/`basename ${0}`.pid" ;
+pidfile="/var/run/`basename ${0}`.pid" ;
 
 usage()
 {
@@ -19,6 +19,7 @@ usage()
         echo "-x | --xz :: compress dump using xz"
         echo "-m | --master :: set master data"
         echo "-q | --quiet :: silent mode"
+        echo "--pid-file :: pid file default ${pidfile}"
         echo "-h | --help :: display this help"
 }
 
@@ -58,6 +59,9 @@ while [ "${1}" != "" ]; do
         -m | --master )         master=1
 	    -q | --quiet )		    quiet=1
 				                ;;
+        --pid-file )		    shift
+                                pidfile=${1}
+                                ;;
         -h | --help )           usage
                                 exit
                                 ;;
@@ -78,15 +82,15 @@ if [ "${dir}" = "" ] || [ ! -d ${dir} ] ; then
 	exit 1 ;
 fi
 
-if [ -s ${mypidfile} ] ; then
+if [ -s ${pidfile} ] ; then
     
     error "ERROR: `hostname` script ${script} already running!" ;
 	exit 1 ;
 fi
 
-trap "rm -f ${mypidfile} ;" EXIT INT KILL TERM SIGKILL SIGTERM;
+trap "rm -f ${pidfile} ;" EXIT INT KILL TERM SIGKILL SIGTERM;
 
-echo $$ > ${mypidfile} ;
+echo $$ > ${pidfile} ;
 
 mysqlparams="   --all-databases \
                 --add-drop-database \
@@ -167,6 +171,6 @@ if [ ! "${quiet}" ] ; then
     echo "Dump completed (`date +\"%H:%M:%S\"`)..." ;
 fi
 
-rm -f ${mypidfile} ;
+rm -f ${pidfile} ;
 
 exit 0 ;
