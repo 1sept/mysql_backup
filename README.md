@@ -44,5 +44,5 @@ set master data in dump
     user = mysqldump
     password = secret_passwd_here
     host = localhost
-    max-allowed-packet=512M
+    max-allowed-packet=1G
 ```

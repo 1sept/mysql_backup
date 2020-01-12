@@ -90,24 +90,21 @@ mysqlparams="   --all-databases \
                 --add-drop-database \
                 --add-drop-table \
                 --add-drop-trigger \
+                --triggers \
                 --add-locks \
-		        --disable-keys \
-                --allow-keywords \
-                --complete-insert \
                 --create-options \
-                --default-character-set=UTF8 \
+                --complete-insert \
+                --extended-insert \
+                --allow-keywords \
+                --default-character-set=utf8mb4 \
                 --dump-date \
                 --events \
-                --extended-insert \
-                --flush-privileges \
-                --quick \
-                --quote-names \
                 --routines \
-                --set-charset \
-                --triggers \
-                --force \
+                --quote-names \
+                --flush-privileges \
                 --comments \
-		        --max-allowed-packet=128M \
+                --quick \
+                --force \
                 --log-error=/var/log/mysqldump.log" ;
 
 if [ "${singletrans}" ] ; then
