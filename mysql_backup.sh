@@ -15,7 +15,8 @@ usage()
         echo "-e | --email :: notification email"
        	echo "-l | --lock-all-tables"
        	echo "-s | --single-transaction"
-        echo "-z | --compress :: gzip dump"
+        echo "-z | --gzip :: compress dump using gzip"
+        echo "-x | --xz :: compress dump using xz"
         echo "-m | --master :: set master data"
         echo "-q | --quiet :: silent mode"
         echo "-h | --help :: display this help"
@@ -50,7 +51,9 @@ while [ "${1}" != "" ]; do
 	    -s | --single-transaction ) 
                                 singletrans=1
                                 ;;
-	    -z | --compress )       compress=1
+	    -z | --gzip )           gzip=1
+                                ;;
+        -x | --xz )             xz=1
                                 ;;
         -m | --master )         master=1
 	    -q | --quiet )		    quiet=1
@@ -105,6 +108,7 @@ mysqlparams="   --all-databases \
                 --comments \
                 --quick \
                 --force \
+                --ignore-table=mysql.proc
                 --log-error=/var/log/mysqldump.log" ;
 
 if [ "${singletrans}" ] ; then
@@ -142,17 +146,26 @@ dump_file_name="${dir}/${prefix}.${date}.sql" ;
 
 mysqldump ${mysqlparams} > ${dump_file_name} ;
 
-if [ "${compress}" ] ; then
+if [ "${gzip}" ] ; then
 
 	if [ ! "${quiet}" ] ; then
-        echo "Compressing dump (`date +\"%H:%M:%S\"`)..." ;
+        echo "Compressing dump by gzip (`date +\"%H:%M:%S\"`)..." ;
 	fi
 
 	gzip ${dump_file_name} ;
+else 
+    if  [ "${xz}" ] ; than
+
+        if [ ! "${quiet}" ] ; then
+            echo "Compressing dump by xz (`date +\"%H:%M:%S\"`)..." ;
+        fi
+
+        xz ${dump_file_name} ;
+    fi
 fi
 
 if [ ! "${quiet}" ] ; then
-    echo "atabase dump completed (`date +\"%H:%M:%S\"`)..." ;
+    echo "Dump completed (`date +\"%H:%M:%S\"`)..." ;
 fi
 
 rm -f ${mypidfile} ;
