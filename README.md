@@ -12,8 +12,8 @@ Scripts
 
 ## Example
 
-**Usage:** `mysql_backup.sh -d /backup/dir/ -n daily [-c 10 -s -z -e test@domain.org]`
-**Usage:** `mysql_db_dump.sh ${0} databse1 [database2 database3 database4 ...]`
+**Usage:** `./mysql_backup.sh -d /backup/dir/ -n daily [-c 10 -s -z -e test@domain.org]`
+**Usage:** `./mysql_db_dump.sh databse1 [database2 database3 database4 ...]`
 
 ## mysql_bakcup Options
 
