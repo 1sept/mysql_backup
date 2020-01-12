@@ -35,7 +35,7 @@ compress dump using gzip
 **-x, --xz**  
 compress dump using xz  
 **--xz-threads**
-number of worker threads to use by xz  
+number of worker threads to use by xz. 0 - use all CPU. (default: 2)
 **-m, --master**  
 set master data in dump  
 **-q, --quiet**  
@@ -45,7 +45,7 @@ set pid-file (default: /var/run/mysql_backup.sh.pid)
 
 ## Setup script in crontab
 
-`20      01      *       *     *    root    /bin/sh /path/to/mysql_backup.sh -d /backup/dir/ -n daily -c 10 -e admin@email.com -z -q -m`
+`20      01      *       *     *    root    /bin/sh /path/to/mysql_backup.sh -d /backup/dir/ -n daily -c 7 -e admin@email.com -x --xz-threads=6 -q -m`
 
 ## .my.cnf example
 

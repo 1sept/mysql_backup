@@ -7,17 +7,17 @@ pidfile="/var/run/`basename ${0}`.pid" ;
 
 usage()
 {
-        echo "Usage: mysql_backup.sh -d /var/backup -n daily [-c 10 -s -a -e test@domain.org]"
+        echo "Usage: mysql_backup.sh -d /var/backup -n daily [-c 10 -s -x --xz-threads=6 -e test@domain.org]"
 	    echo
        	echo "-d | --dir :: backup directory"
 	    echo "-n | --name :: backup name"
-        echo "-c | --copies :: number of copies to store (default 10)"
+        echo "-c | --copies :: number of copies to store (default: 10)"
         echo "-e | --email :: notification email"
        	echo "-l | --lock-all-tables"
        	echo "-s | --single-transaction"
         echo "-z | --gzip :: compress dump using gzip"
         echo "-x | --xz :: compress dump using xz"
-        echo "--xz-threads :: xz threads (0 - all CPUs)"
+        echo "--xz-threads :: number of worker threads to use by xz. 0 - use all CPU. (default: 2)"
         echo "-m | --master :: set master data"
         echo "-q | --quiet :: silent mode"
         echo "--pid-file :: pid file default ${pidfile}"
@@ -80,7 +80,7 @@ then
 	copies=10
 fi
 
-if [ "${xz_threads}" = "" ] || [ ! -n "${xz_threads}" ] || [ "${xz_threads}" -le "0" ] ;
+if [ "${xz_threads}" = "" ] || [ ! -n "${xz_threads}" ] || [ "${xz_threads}" -lt "0" ] ;
 then
 	xz_threads=2
 fi
