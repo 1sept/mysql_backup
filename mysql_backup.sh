@@ -1,9 +1,8 @@
 #!/bin/sh
-
-export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin" ;
-
-script="$(basename "$(test -L "${0}" && readlink "${0}" || echo "${0}")")" ;
-pidfile="/var/run/`basename ${0}`.pid" ;
+#
+# MySQL backup script
+# Set authorisation and host paramethers in homedir .my.cnf param. Read README.md
+#
 
 usage()
 {
@@ -33,6 +32,34 @@ error()
     fi
 }
 
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin" ;
+
+script="$(basename "$(test -L "${0}" && readlink "${0}" || echo "${0}")")" ;
+pidfile="/var/run/`basename ${0}`.pid" ;
+
+mysqlparams="   --all-databases \
+                --add-drop-database \
+                --add-drop-table \
+                --add-drop-trigger \
+                --triggers \
+                --add-locks \
+                --create-options \
+                --complete-insert \
+                --extended-insert \
+                --allow-keywords \
+                --default-character-set=utf8mb4 \
+                --dump-date \
+                --events \
+                --routines \
+                --quote-names \
+                --flush-privileges \
+                --comments \
+                --quick \
+                --force \
+                --ignore-table=mysql.slow_log \
+                --log-error=/var/log/mysqldump.log" ;
+
+
 while [ "${1}" != "" ]; do
     case ${1} in
         -d | --dir )            shift
@@ -48,10 +75,10 @@ while [ "${1}" != "" ]; do
                                 email=${1}
                                 ;;
         -l | --lock-all-tables ) 
-                                lock=1
+                                mysqlparams="${mysqlparams} --lock-all-tables" ;
                                 ;;
 	    -s | --single-transaction ) 
-                                singletrans=1
+                                mysqlparams="${mysqlparams} --single-transaction" ;
                                 ;;
 	    -z | --gzip )           gzip=1
                                 ;;
@@ -60,7 +87,8 @@ while [ "${1}" != "" ]; do
         --xz-threads )          shift
                                 xz_threads=${1}
                                 ;;
-        -m | --master )         master=1
+        -m | --master )         mysqlparams="${mysqlparams} --master-data --include-master-host-port --apply-slave-statements" ;
+                                ;;
 	    -q | --quiet )		    quiet=1
 				                ;;
         --pid-file )		    shift
@@ -101,42 +129,6 @@ trap "rm -f ${pidfile} ;" EXIT INT KILL TERM SIGKILL SIGTERM;
 
 echo $$ > ${pidfile} ;
 
-mysqlparams="   --all-databases \
-                --add-drop-database \
-                --add-drop-table \
-                --add-drop-trigger \
-                --triggers \
-                --add-locks \
-                --create-options \
-                --complete-insert \
-                --extended-insert \
-                --allow-keywords \
-                --default-character-set=utf8mb4 \
-                --dump-date \
-                --events \
-                --routines \
-                --quote-names \
-                --flush-privileges \
-                --comments \
-                --quick \
-                --force \
-                --ignore-table=mysql.slow_log \
-                --log-error=/var/log/mysqldump.log" ;
-
-if [ "${singletrans}" ] ; then
-    mysqlparams="${mysqlparams} --single-transaction" ;
-fi
-
-if [ "${lock}" ] ; then
-    mysqlparams="${mysqlparams} --lock-all-tables" ;
-fi
-
-if [ "${master}" ] ; then
-    mysqlparams="${mysqlparams} --master-data --include-master-host-port --apply-slave-statements" ;
-fi
-
-prefix="mysqldump.`hostname -s`.${name}" ;
-
 if [ `ls ${dir} | grep ${prefix} | wc -l` -ge "${copies}" ] ; then
 	i=1;
 	for filename in `ls ${dir} | grep ${prefix} | sort -r` ; do
@@ -151,10 +143,7 @@ if [ ! "${quiet}" ] ; then
 	echo "Starting database dump (`date +\"%H:%M:%S\"`)" ;
 fi
 
-date=`date +"%y%m%d.%H%M%S"` ;
-
-
-dump_file_name="${dir}/${prefix}.${date}.sql" ;
+dump_file_name="${dir}/mysqldump.`hostname -s`.${name}.`date +\"%y%m%d.%H%M%S\"`.sql" ;
 
 mysqldump ${mysqlparams} > ${dump_file_name} ;
 

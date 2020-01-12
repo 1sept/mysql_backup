@@ -13,21 +13,21 @@ if [ -z "${1}" ] ; then
 	exit 1 ;
 fi
 
-param="		--lock-tables \
+param="	--lock-tables \
 		--add-drop-table \
  		--add-drop-trigger \
-                --triggers \
-                --add-locks \
-                --create-options \
-                --complete-insert \
-                --extended-insert \
-                --allow-keywords \
-                --default-character-set=utf8mb4 \
-                --dump-date \
-                --quote-names \
-                --comments \
-                --quick \
-                --force"
+        --triggers \
+        --add-locks \
+        --create-options \
+        --complete-insert \
+        --extended-insert \
+        --allow-keywords \
+        --default-character-set=utf8mb4 \
+        --dump-date \
+        --quote-names \
+        --comments \
+        --quick \
+        --force"
 
 while [ "${1}" != "" ]; do
 	echo
