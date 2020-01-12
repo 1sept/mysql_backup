@@ -44,10 +44,10 @@ while [ "${1}" != "" ]; do
         	echo "Database ${1} dump not completed!" ;
         	rm ${filename} ;
 	else
-		echo "Compressing dump"
+		echo "Compressing dump..."
 		xz -T2 ${filename} ;
+		echo "Database ${1} dump successful completed. ('${filename}.xz')" ;
 	fi
-	echo "Database ${1} dump successful completed. ('${filename}.xz')" ;
 	shift
 done
 
