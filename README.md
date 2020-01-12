@@ -34,6 +34,8 @@ this option sets the transaction isolation mode to REPEATABLE READ and sends a S
 compress dump using gzip  
 **-x, --xz**  
 compress dump using xz  
+**--xz-threads**
+number of worker threads to use by xz
 **-m, --master**  
 set master data in dump  
 **-q, --quiet**  

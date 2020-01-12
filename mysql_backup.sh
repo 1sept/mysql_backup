@@ -17,6 +17,7 @@ usage()
        	echo "-s | --single-transaction"
         echo "-z | --gzip :: compress dump using gzip"
         echo "-x | --xz :: compress dump using xz"
+        echo "--xz-threads :: xz threads (0 - all CPUs)"
         echo "-m | --master :: set master data"
         echo "-q | --quiet :: silent mode"
         echo "--pid-file :: pid file default ${pidfile}"
@@ -56,6 +57,9 @@ while [ "${1}" != "" ]; do
                                 ;;
         -x | --xz )             xz=1
                                 ;;
+        --xz-threads )          shift
+                                xz_threads=${1}
+                                ;;
         -m | --master )         master=1
 	    -q | --quiet )		    quiet=1
 				                ;;
@@ -74,6 +78,11 @@ done
 if [ "${copies}" = "" ] || [ ! -n "${copies}" ] || [ "${copies}" -le "0" ] ;
 then
 	copies=10
+fi
+
+if [ "${xz_threads}" = "" ] || [ ! -n "${xz_threads}" ] || [ "${xz_threads}" -le "0" ] ;
+then
+	xz_threads=2
 fi
 
 if [ "${dir}" = "" ] || [ ! -d ${dir} ] ; then
@@ -163,7 +172,7 @@ else
             echo "Compressing dump by xz (`date +\"%H:%M:%S\"`)..." ;
         fi
 
-        xz -T2 ${dump_file_name} ;
+        xz --threads=${xz_threads} ${dump_file_name} ;
     fi
 fi
 
