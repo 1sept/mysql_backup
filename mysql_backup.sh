@@ -163,7 +163,7 @@ else
             echo "Compressing dump by xz (`date +\"%H:%M:%S\"`)..." ;
         fi
 
-        xz ${dump_file_name} ;
+        xz -T2 ${dump_file_name} ;
     fi
 fi
 
