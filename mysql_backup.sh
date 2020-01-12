@@ -108,7 +108,7 @@ mysqlparams="   --all-databases \
                 --comments \
                 --quick \
                 --force \
-                --ignore-table=mysql.proc
+#                --ignore-table=mysql.proc \
                 --log-error=/var/log/mysqldump.log" ;
 
 if [ "${singletrans}" ] ; then
