@@ -16,10 +16,10 @@ usage()
        	echo "-s | --single-transaction"
         echo "-z | --gzip :: compress dump using gzip"
         echo "-x | --xz :: compress dump using xz"
-        echo "--xzthreads :: number of worker threads to use by xz. 0 - use all CPU. (default: 2)"
+        echo "--xz-threads :: number of worker threads to use by xz. 0 - use all CPU. (default: 2)"
         echo "-m | --master :: set master data"
         echo "-q | --quiet :: silent mode"
-        echo "--pidfile :: pid file default ${pidfile}"
+        echo "--pid-file :: pid file default ${pidfile}"
         echo "-h | --help :: display this help"
 }
 
@@ -84,14 +84,14 @@ while [ "${1}" != "" ]; do
                                 ;;
         -x | --xz )             xz=1
                                 ;;
-        --xzthreads )           shift
+        --xz-threads )           shift
                                 xzthreads=${1}
                                 ;;
         -m | --master )         mysqlparams="${mysqlparams} --master-data --include-master-host-port --apply-slave-statements" ;
                                 ;;
 	    -q | --quiet )		    quiet=1
 				                ;;
-        --pidfile )		        shift
+        --pid-file )		        shift
                                 pidfile=${1}
                                 ;;
         -h | --help )           usage
