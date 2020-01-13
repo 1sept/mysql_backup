@@ -57,7 +57,7 @@ mysqlparams="   --all-databases \
                 --quick \
                 --force \
                 --ignore-table=mysql.slow_log \
-                --log-error=/var/log/mysqldump.log" ;
+                --log-error=/tmp/mysqldump.log" ;
 
 
 while [ "${1}" != "" ]; do
