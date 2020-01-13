@@ -131,6 +131,8 @@ trap "rm -f ${pidfile} ;" EXIT INT KILL TERM SIGKILL SIGTERM;
 
 echo $$ > ${pidfile} ;
 
+prefix="mysqldump.`hostname -s`.${name}";
+
 if [ `ls ${dir} | grep ${prefix} | wc -l` -ge "${copies}" ] ; then
 	i=1;
 	for filename in `ls ${dir} | grep ${prefix} | sort -r` ; do
@@ -145,7 +147,7 @@ if [ ! "${quiet}" ] ; then
 	echo "Starting database dump (`date +\"%H:%M:%S\"`)" ;
 fi
 
-dump_file_name="`realpath ${dir}`/mysqldump.`hostname -s`.${name}.`date +\"%y%m%d.%H%M%S\"`.sql" ;
+dump_file_name="`realpath ${dir}`/${prefix}.`date +\"%y%m%d.%H%M%S\"`.sql" ;
 
 mysqldump ${mysqlparams} > ${dump_file_name} ;
 
