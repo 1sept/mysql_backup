@@ -31,7 +31,7 @@ param="	--lock-tables \
 
 while [ "${1}" != "" ]; do
 	echo
-	echo "Starting '{$1}' database dump..." ;
+	echo "Starting '${1}' database dump..." ;
 
 	filename="mysqldump.${1}.`hostname -s`.`date +\"%y%m%d.%H%M%S\"`.sql" ;
 
