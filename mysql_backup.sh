@@ -16,10 +16,10 @@ usage()
        	echo "-s | --single-transaction"
         echo "-z | --gzip :: compress dump using gzip"
         echo "-x | --xz :: compress dump using xz"
-        echo "--xz-threads :: number of worker threads to use by xz. 0 - use all CPU. (default: 2)"
+        echo "--xzthreads :: number of worker threads to use by xz. 0 - use all CPU. (default: 2)"
         echo "-m | --master :: set master data"
         echo "-q | --quiet :: silent mode"
-        echo "--pid-file :: pid file default ${pidfile}"
+        echo "--pidfile :: pid file default ${pidfile}"
         echo "-h | --help :: display this help"
 }
 
@@ -84,14 +84,14 @@ while [ "${1}" != "" ]; do
                                 ;;
         -x | --xz )             xz=1
                                 ;;
-        --xz-threads )          shift
-                                xz_threads=${1}
+        --xzthreads )           shift
+                                xzthreads=${1}
                                 ;;
         -m | --master )         mysqlparams="${mysqlparams} --master-data --include-master-host-port --apply-slave-statements" ;
                                 ;;
 	    -q | --quiet )		    quiet=1
 				                ;;
-        --pid-file )		    shift
+        --pidfile )		        shift
                                 pidfile=${1}
                                 ;;
         -h | --help )           usage
@@ -108,9 +108,9 @@ then
 	copies=10
 fi
 
-if [ "${xz_threads}" = "" ] || [ ! -n "${xz_threads}" ] || [ "${xz_threads}" -lt "0" ] ;
+if [ "${xzthreads}" = "" ] || [ ! -n "${xzthreads}" ] || [ "${xzthreads}" -lt "0" ] ;
 then
-	xz_threads=2
+	xzthreads=2
 fi
 
 if [ "${dir}" = "" ] || [ ! -d ${dir} ] ; then
@@ -155,13 +155,13 @@ if [ "${gzip}" ] ; then
 
 	gzip ${dump_file_name} ;
 else 
-    if  [ "${xz}" ] ; than
+    if  [ "${xz}" ] ; then
 
         if [ ! "${quiet}" ] ; then
             echo "Compressing dump by xz (`date +\"%H:%M:%S\"`)..." ;
         fi
 
-        xz --threads=${xz_threads} ${dump_file_name} ;
+        xz --threads=${xzthreads} ${dump_file_name} ;
     fi
 fi
 
