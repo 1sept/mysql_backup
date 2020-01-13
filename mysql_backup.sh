@@ -97,7 +97,9 @@ while [ "${1}" != "" ]; do
         -h | --help )           usage
                                 exit
                                 ;;
-        * )                     usage
+        * )                     
+                                echo "Uncnown option ${1}!" ;
+                                usage
                                 exit 1
     esac
     shift
