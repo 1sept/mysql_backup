@@ -143,7 +143,7 @@ if [ ! "${quiet}" ] ; then
 	echo "Starting database dump (`date +\"%H:%M:%S\"`)" ;
 fi
 
-dump_file_name="${dir}/mysqldump.`hostname -s`.${name}.`date +\"%y%m%d.%H%M%S\"`.sql" ;
+dump_file_name="`realpath ${dir}`/mysqldump.`hostname -s`.${name}.`date +\"%y%m%d.%H%M%S\"`.sql" ;
 
 mysqldump ${mysqlparams} > ${dump_file_name} ;
 
