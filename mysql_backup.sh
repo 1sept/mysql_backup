@@ -35,7 +35,7 @@ error()
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin" ;
 
 script="$(basename "$(test -L "${0}" && readlink "${0}" || echo "${0}")")" ;
-pidfile="/var/run/`basename ${0}`.pid" ;
+pidfile="/tmp/`basename ${0}`.pid" ;
 
 mysqlparams="   --all-databases \
                 --add-drop-database \
