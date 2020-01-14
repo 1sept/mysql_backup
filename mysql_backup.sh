@@ -127,7 +127,7 @@ if [ -s ${pidfile} ] ; then
 	exit 1 ;
 fi
 
-trap "rm -f ${pidfile} ;" EXIT INT KILL TERM SIGKILL SIGTERM;
+trap "rm -f ${pidfile} ;" EXIT INT KILL TERM SIGKILL SIGTERM SIGHUP;
 
 echo $$ > ${pidfile} ;
 
