@@ -63,16 +63,16 @@ mysqlparams="   --all-databases \
 while [ "${1}" != "" ]; do
     case ${1} in
         -d | --dir )            shift
-                                dir=${1}
+                                dir=${1} ;
                                 ;;
 	    -n | --name )		    shift
-                               	name=${1}
+                               	name=${1} ;
                                	;;
        	-c | --copies )         shift
-                                copies=${1}
+                                copies=${1} ;
                                 ;;
 	    -e | --email )          shift
-                                email=${1}
+                                email=${1} ;
                                 ;;
         -l | --lock-all-tables ) 
                                 mysqlparams="${mysqlparams} --lock-all-tables" ;
@@ -80,39 +80,39 @@ while [ "${1}" != "" ]; do
 	    -s | --single-transaction ) 
                                 mysqlparams="${mysqlparams} --single-transaction" ;
                                 ;;
-	    -z | --gzip )           gzip=1
+	    -z | --gzip )           gzip=1 ;
                                 ;;
-        -x | --xz )             xz=1
+        -x | --xz )             xz=1 ;
                                 ;;
-        --xz-threads )           shift
+        --xz-threads )          shift
                                 xzthreads=${1}
                                 ;;
         -m | --master )         mysqlparams="${mysqlparams} --master-data --include-master-host-port --apply-slave-statements" ;
                                 ;;
 	    -q | --quiet )		    quiet=1
 				                ;;
-        --pid-file )		        shift
+        --pid-file )		    shift
                                 pidfile=${1}
                                 ;;
-        -h | --help )           usage
-                                exit
+        -h | --help )           usage ;
+                                exit ;
                                 ;;
         * )                     
                                 echo "Uncnown option ${1}!" ;
-                                usage
-                                exit 1
+                                usage ;
+                                exit 1 ;
     esac
     shift
 done
 
 if [ "${copies}" = "" ] || [ ! -n "${copies}" ] || [ "${copies}" -le "0" ] ;
 then
-	copies=10
+	copies=10 ;
 fi
 
 if [ "${xzthreads}" = "" ] || [ ! -n "${xzthreads}" ] || [ "${xzthreads}" -lt "0" ] ;
 then
-	xzthreads=2
+	xzthreads=2 ;
 fi
 
 if [ "${dir}" = "" ] || [ ! -d ${dir} ] ; then
