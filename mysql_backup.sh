@@ -121,6 +121,9 @@ if [ "${dir}" = "" ] || [ ! -d ${dir} ] ; then
 	exit 1 ;
 fi
 
+# sleep random 1-6 sec for crone
+sleep `shuf -i0-9 -n1` ;
+
 if [ -s ${pidfile} ] ; then
     
     error "ERROR: `hostname` script ${script} already running! Pid file \"${pidfile}\" exists!" ;
