@@ -54,5 +54,5 @@ set pid-file (default: /var/run/mysql_backup.sh.pid)
     user = mysqldump
     password = secret_passwd_here
     host = localhost
-    max-allowed-packet=1G
+    max-allowed-packet=256MB
 ```
