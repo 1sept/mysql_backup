@@ -35,7 +35,7 @@ compress dump using gzip
 **-x, --xz**  
 compress dump using xz  
 **--xz-threads**
-number of worker threads to use by xz. 0 - use all CPU. (default: 2)
+number of worker threads to use by xz. 0 - use all CPU. (default: 2)  
 **-m, --master**  
 set master data in dump  
 **-q, --quiet**  
