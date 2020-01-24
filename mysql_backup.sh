@@ -136,7 +136,7 @@ echo $$ > ${pidfile} ;
 
 prefix="mysqldump.`hostname -s`.${name}";
 
-if [ `ls -t ${dir} | grep ${prefix}` -ge "${copies}" ] ; then
+if [ `ls -t ${dir} | grep ${prefix} | wc -l` -ge "${copies}" ] ; then
 	
     i=1 ;
 	
