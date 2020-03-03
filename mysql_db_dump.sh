@@ -14,7 +14,6 @@ if [ -z "${1}" ] ; then
 fi
 
 param="	--lock-tables \
-		--add-drop-table \
  		--add-drop-trigger \
         --triggers \
         --add-locks \
