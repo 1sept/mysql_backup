@@ -42,8 +42,9 @@ while [ "${1}" != "" ]; do
 	fi
 
 	if ! mysqldump ${1} ${param} > ${filename} ; then
-        	echo "Database ${1} dump not completed!" ;
-        	rm ${filename} ;
+		echo "Database ${1} dump not completed!" ;
+		rm ${filename} ;
+		exit 1 ;
 	else
 		echo "Compressing dump..."
 		xz -T2 ${filename} ;
