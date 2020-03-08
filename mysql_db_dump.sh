@@ -15,8 +15,9 @@ fi
 
 param="	--lock-tables \
  		--add-drop-trigger \
-        --triggers \
+		--triggers --routines --events \
         --add-locks \
+		--skip-add-drop-table \
         --create-options \
         --complete-insert \
         --extended-insert \
