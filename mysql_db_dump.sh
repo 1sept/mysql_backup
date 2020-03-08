@@ -26,6 +26,7 @@ param="	--lock-tables \
         --quote-names \
         --comments \
         --quick \
+		--set-gtid-purged=OFF \
         --force"
 
 while [ "${1}" != "" ]; do

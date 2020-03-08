@@ -9,7 +9,7 @@ usage()
         echo "Usage: mysql_backup.sh -d /var/backup -n daily [-c 10 -s -x --xz-threads=6 -e test@domain.org]"
 	    echo
        	echo "-d | --dir :: backup directory"
-	    echo "-n | --name :: backup name"
+	echo "-n | --name :: backup name"
         echo "-c | --copies :: number of copies to store (default: 10)"
         echo "-e | --email :: notification email"
        	echo "-l | --lock-all-tables"
