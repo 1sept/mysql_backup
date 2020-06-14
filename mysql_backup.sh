@@ -92,7 +92,8 @@ while [ "${1}" != "" ]; do
                                 ;;
 	    -q | --quiet )		    quiet=1
 				                ;;
-        -i | --ignore-table )   mysqlparams="${mysqlparams} --ignore-table=${1}" ;
+        -i | --ignore-table )   shift
+                                mysqlparams="${mysqlparams} --ignore-table=${1}" ;
 				                ;;
         --pid-file )		    shift
                                 pidfile=${1}
