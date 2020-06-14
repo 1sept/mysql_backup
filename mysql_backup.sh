@@ -14,6 +14,7 @@ usage()
         echo "-e | --email :: notification email"
        	echo "-l | --lock-all-tables"
        	echo "-s | --single-transaction"
+        echo "-i| --ignore-table"
         echo "-z | --gzip :: compress dump using gzip"
         echo "-x | --xz :: compress dump using xz"
         echo "--xz-threads :: number of worker threads to use by xz. 0 - use all CPU. (default: 2)"
@@ -90,6 +91,8 @@ while [ "${1}" != "" ]; do
         -m | --master )         mysqlparams="${mysqlparams} --master-data --include-master-host-port --apply-slave-statements" ;
                                 ;;
 	    -q | --quiet )		    quiet=1
+				                ;;
+        -i | --ignore-table )   mysqlparams="${mysqlparams} --master-data --include-master-host-port --ignore-table=${1}" ;
 				                ;;
         --pid-file )		    shift
                                 pidfile=${1}
